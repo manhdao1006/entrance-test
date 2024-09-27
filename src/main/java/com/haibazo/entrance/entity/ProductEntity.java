@@ -46,6 +46,10 @@ public class ProductEntity {
     private BigDecimal rate;
     private String thumbnail;
 
+    // "1": not deleted / "0": deleted
+    @Column(name = "del_flag", nullable = false)
+    private String delFlag = "1";
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "style_id")
     private StyleEntity style;

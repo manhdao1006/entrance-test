@@ -23,13 +23,17 @@ public class ProductController {
     // Build API get all products
     @GetMapping("/products")
     public ApiResponse<List<ProductDTO>> getProducts() {
-        return ApiResponse.<List<ProductDTO>>builder().result(productService.getProducts()).build();
+        return ApiResponse.<List<ProductDTO>>builder()
+                .result(productService.getProducts())
+                .build();
     }
 
     // Build API get a product by product code
     @GetMapping("/product/{code}")
     public ApiResponse<ProductDTO> getProductByCode(@PathVariable String code) {
-        return ApiResponse.<ProductDTO>builder().result(productService.getProductByCode(code)).build();
+        return ApiResponse.<ProductDTO>builder()
+                .result(productService.getProductByCode(code))
+                .build();
     }
 
 }

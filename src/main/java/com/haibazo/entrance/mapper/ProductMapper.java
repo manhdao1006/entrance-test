@@ -43,6 +43,7 @@ public class ProductMapper {
         productDTO.setQuantity(entity.getQuantity());
         productDTO.setRate(entity.getRate());
         productDTO.setThumbnail(entity.getThumbnail());
+        productDTO.setDelFlag("1");
         productDTO.setStyle(toStyleDTO(entity.getStyle()));
         productDTO.setImages(toImagesDTO(entity.getImages()));
         productDTO.setColors(toColorsDTO(entity.getColors()));

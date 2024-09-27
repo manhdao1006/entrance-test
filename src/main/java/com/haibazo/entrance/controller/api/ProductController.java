@@ -69,11 +69,14 @@ public class ProductController {
 
         ProductDTO createdProduct = productService.addProduct(productDTO, colors, thumbnail);
 
-        return ApiResponse.<ProductDTO>builder().result(createdProduct).message("Creating successful!").build();
+        return ApiResponse.<ProductDTO>builder()
+                .result(createdProduct)
+                .message("Creating successful!")
+                .build();
     }
 
     @PutMapping("/edit/{code}")
-    public ApiResponse<ProductDTO> putMethodName(@PathVariable("code") String productCode,
+    public ApiResponse<ProductDTO> editProduct(@PathVariable("code") String productCode,
             @RequestParam(value = "productName", required = true) String productName,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "price", required = false) BigDecimal price,
@@ -109,12 +112,25 @@ public class ProductController {
 
         ProductDTO updatedProduct = productService.editProduct(productCode, productDTO, colors, thumbnail);
 
-        return ApiResponse.<ProductDTO>builder().result(updatedProduct).message("Updating successful!").build();
+        return ApiResponse.<ProductDTO>builder()
+                .result(updatedProduct)
+                .message("Updating successful!")
+                .build();
     }
 
     @DeleteMapping("/delete/{code}")
     public ApiResponse<String> deleteProduct(@PathVariable String code) {
-        return ApiResponse.<String>builder().result(productService.deleteProduct(code)).message("Deleting successful!")
+        return ApiResponse.<String>builder()
+                .result(productService.deleteProduct(code))
+                .message("Deleting successful!")
+                .build();
+    }
+
+    @PutMapping("soft-delete/{code}")
+    public ApiResponse<String> softDeleteProduct(@PathVariable String code) {
+        return ApiResponse.<String>builder()
+                .result(productService.softDeleteProduct(code))
+                .message("Deleting successful!")
                 .build();
     }
 

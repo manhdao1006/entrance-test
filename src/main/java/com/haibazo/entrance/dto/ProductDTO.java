@@ -23,6 +23,7 @@ public class ProductDTO {
     private Integer quantity;
     private BigDecimal rate;
     private String thumbnail;
+    private String delFlag;
     private StyleDTO style;
     private List<ImageDTO> images;
     private List<ColorDTO> colors;

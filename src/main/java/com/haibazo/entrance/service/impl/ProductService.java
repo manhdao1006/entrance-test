@@ -46,7 +46,7 @@ public class ProductService implements IProductService {
      */
     @Override
     public List<ProductDTO> getProducts() {
-        List<ProductEntity> entities = productRepository.findAll();
+        List<ProductEntity> entities = productRepository.findAllByDelFlag("1");
         return entities.stream().map(productMapper::toDTO).toList();
     }
 
@@ -70,7 +70,7 @@ public class ProductService implements IProductService {
      * 
      * @param product code
      * 
-     * @return product
+     * @return "ok"
      */
     @Transactional
     @Override
@@ -87,6 +87,26 @@ public class ProductService implements IProductService {
             }
         }
         productRepository.deleteByProductCode(productCode);
+
+        return "ok";
+    }
+
+    /*
+     * soft delete product
+     * 
+     * @param product code
+     * 
+     * @return "ok"
+     */
+    @Transactional
+    @Override
+    public String softDeleteProduct(String productCode) {
+        ProductEntity entity = productRepository.findByProductCode(productCode)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with code: " + productCode + " not found"));
+
+        if (entity != null) {
+            entity.setDelFlag("0");
+        }
 
         return "ok";
     }

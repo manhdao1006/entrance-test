@@ -15,6 +15,8 @@ public interface IProductService {
 
     String deleteProduct(String productCode);
 
+    String softDeleteProduct(String productCode);
+
     ProductDTO addProduct(ProductDTO productDTO, List<Integer> colors, MultipartFile thumbnail)
             throws IOException;
 
