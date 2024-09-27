@@ -240,4 +240,26 @@ public class ProductService implements IProductService {
         }
     }
 
+    /*
+     * get all products by price from low to high
+     * 
+     * @return products
+     */
+    @Override
+    public List<ProductDTO> sortedByPriceAsc() {
+        List<ProductEntity> entities = productRepository.findAllByDelFlagOrderByPriceAsc("1");
+        return entities.stream().map(productMapper::toDTO).toList();
+    }
+
+    /*
+     * get all products by price from high to low
+     * 
+     * @return products
+     */
+    @Override
+    public List<ProductDTO> sortedByPriceDesc() {
+        List<ProductEntity> entities = productRepository.findAllByDelFlagOrderByPriceDesc("1");
+        return entities.stream().map(productMapper::toDTO).toList();
+    }
+
 }

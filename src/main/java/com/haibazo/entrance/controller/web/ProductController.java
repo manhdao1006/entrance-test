@@ -20,6 +20,22 @@ public class ProductController {
 
     private final IProductService productService;
 
+    // Build API sort product by price from low to high
+    @GetMapping("/products/price-asc")
+    public ApiResponse<List<ProductDTO>> sortedByPriceAsc() {
+        return ApiResponse.<List<ProductDTO>>builder()
+                .result(productService.sortedByPriceAsc())
+                .build();
+    }
+
+    // Build API sort product by price from high to low
+    @GetMapping("/products/price-desc")
+    public ApiResponse<List<ProductDTO>> sortedByPriceDesc() {
+        return ApiResponse.<List<ProductDTO>>builder()
+                .result(productService.sortedByPriceDesc())
+                .build();
+    }
+
     // Build API get all products
     @GetMapping("/products")
     public ApiResponse<List<ProductDTO>> getProducts() {

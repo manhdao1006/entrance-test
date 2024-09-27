@@ -18,4 +18,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     void deleteByProductCode(String productCode);
 
     List<ProductEntity> findAllByDelFlag(String delFlag);
+
+    List<ProductEntity> findAllByDelFlagOrderByPriceAsc(String delFlag);
+
+    List<ProductEntity> findAllByDelFlagOrderByPriceDesc(String delFlag);
 }

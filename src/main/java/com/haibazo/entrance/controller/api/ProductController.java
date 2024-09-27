@@ -30,6 +30,7 @@ public class ProductController {
 
     private final IProductService productService;
 
+    // Build API create new product
     @PostMapping("/create")
     public ApiResponse<ProductDTO> addProduct(
             @RequestParam(value = "productCode", required = true) String productCode,
@@ -75,6 +76,7 @@ public class ProductController {
                 .build();
     }
 
+    // Build API update existed product
     @PutMapping("/edit/{code}")
     public ApiResponse<ProductDTO> editProduct(@PathVariable("code") String productCode,
             @RequestParam(value = "productName", required = true) String productName,
@@ -118,6 +120,7 @@ public class ProductController {
                 .build();
     }
 
+    // Build API delete existed product
     @DeleteMapping("/delete/{code}")
     public ApiResponse<String> deleteProduct(@PathVariable String code) {
         return ApiResponse.<String>builder()
@@ -126,6 +129,7 @@ public class ProductController {
                 .build();
     }
 
+    // Build API soft delete product
     @PutMapping("soft-delete/{code}")
     public ApiResponse<String> softDeleteProduct(@PathVariable String code) {
         return ApiResponse.<String>builder()

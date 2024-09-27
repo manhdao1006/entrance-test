@@ -9,17 +9,21 @@ import com.haibazo.entrance.dto.ProductDTO;
 
 public interface IProductService {
 
-    List<ProductDTO> getProducts();
+        List<ProductDTO> getProducts();
 
-    ProductDTO getProductByCode(String productCode);
+        ProductDTO getProductByCode(String productCode);
 
-    String deleteProduct(String productCode);
+        String deleteProduct(String productCode);
 
-    String softDeleteProduct(String productCode);
+        String softDeleteProduct(String productCode);
 
-    ProductDTO addProduct(ProductDTO productDTO, List<Integer> colors, MultipartFile thumbnail)
-            throws IOException;
+        ProductDTO addProduct(ProductDTO productDTO, List<Integer> colors, MultipartFile thumbnail)
+                        throws IOException;
 
-    ProductDTO editProduct(String productCode, ProductDTO productDTO, List<Integer> colors, MultipartFile thumbnail)
-            throws IOException;
+        ProductDTO editProduct(String productCode, ProductDTO productDTO, List<Integer> colors, MultipartFile thumbnail)
+                        throws IOException;
+
+        List<ProductDTO> sortedByPriceAsc();
+
+        List<ProductDTO> sortedByPriceDesc();
 }
