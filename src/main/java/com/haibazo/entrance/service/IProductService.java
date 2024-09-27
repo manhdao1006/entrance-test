@@ -13,6 +13,11 @@ public interface IProductService {
 
     ProductDTO getProductByCode(String productCode);
 
+    String deleteProduct(String productCode);
+
     ProductDTO addProduct(ProductDTO productDTO, List<Integer> colors, MultipartFile thumbnail)
+            throws IOException;
+
+    ProductDTO editProduct(String productCode, ProductDTO productDTO, List<Integer> colors, MultipartFile thumbnail)
             throws IOException;
 }
