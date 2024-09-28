@@ -1,6 +1,7 @@
 package com.haibazo.entrance.service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -26,4 +27,8 @@ public interface IProductService {
         List<ProductDTO> sortedByPriceAsc();
 
         List<ProductDTO> sortedByPriceDesc();
+
+        List<ProductDTO> getProductsByKeyword(String color, String category, String style);
+
+        List<ProductDTO> getProductsByPriceBetween(BigDecimal fromPrice, BigDecimal toPrice);
 }

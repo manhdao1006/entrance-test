@@ -1,6 +1,7 @@
 package com.haibazo.entrance.service.impl;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -259,6 +260,47 @@ public class ProductService implements IProductService {
     @Override
     public List<ProductDTO> sortedByPriceDesc() {
         List<ProductEntity> entities = productRepository.findAllByDelFlagOrderByPriceDesc("1");
+        return entities.stream().map(productMapper::toDTO).toList();
+    }
+
+    /*
+     * get all products by color or category or style
+     * 
+     * @param color name or category name or style name
+     * 
+     * @return products
+     */
+    @Override
+    public List<ProductDTO> getProductsByKeyword(String color, String category, String style) {
+        List<ProductEntity> entities = productRepository.findAllByKeyword(color, category, style);
+        if (entities.isEmpty()) {
+            if (color == null || color.isEmpty()) {
+                throw new ResourceNotFoundException("Products with color " + color + " is not found");
+            } else if (category == null || category.isEmpty()) {
+                throw new ResourceNotFoundException("Products with color " + category + " is not found");
+            } else if (style == null || style.isEmpty()) {
+                throw new ResourceNotFoundException("Products with style " + style + " is not found");
+            }
+        }
+
+        return entities.stream().map(productMapper::toDTO).toList();
+    }
+
+    /*
+     * get all products by price between
+     * 
+     * @param price
+     * 
+     * @return products
+     */
+    @Override
+    public List<ProductDTO> getProductsByPriceBetween(BigDecimal fromPrice, BigDecimal toPrice) {
+        List<ProductEntity> entities = productRepository.findAllByPriceBetween(fromPrice, toPrice);
+        if (entities.isEmpty()) {
+            throw new ResourceNotFoundException(
+                    "Products with from price " + fromPrice + " to price " + toPrice + " is not found");
+        }
+
         return entities.stream().map(productMapper::toDTO).toList();
     }
 

@@ -1,10 +1,12 @@
 package com.haibazo.entrance.controller.web;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.haibazo.entrance.dto.ApiResponse;
@@ -19,6 +21,26 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
 
     private final IProductService productService;
+
+    // Build API get products by price between
+    @GetMapping("/products/price")
+    public ApiResponse<List<ProductDTO>> getProductsByPriceBetween(@RequestParam("from") BigDecimal fromPrice,
+            @RequestParam("to") BigDecimal toPrice) {
+        return ApiResponse.<List<ProductDTO>>builder()
+                .result(productService.getProductsByPriceBetween(fromPrice, toPrice))
+                .build();
+    }
+
+    // Build API get products by color or category or style
+    @GetMapping("/products/filter")
+    public ApiResponse<List<ProductDTO>> getProductsByKeyword(
+            @RequestParam(value = "color", required = false) String color,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "style", required = false) String style) {
+        return ApiResponse.<List<ProductDTO>>builder()
+                .result(productService.getProductsByKeyword(color, category, style))
+                .build();
+    }
 
     // Build API sort product by price from low to high
     @GetMapping("/products/price-asc")
